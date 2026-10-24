@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 980" role="img" aria-labelledby="title desc">
+  <title id="title">ESP32-C6 robot hardware wiring overview</title>
+  <desc id="desc">Diagram showing battery and buck converter power, L298N motor driver and two motors, ESP32-C6 GPIO connections to encoders, MPU6050, HC-SR04 with a two-resistor Echo voltage divider, and common ground.</desc>
+  <defs>
+    <style>
+      .bg{fill:#f4f7fb}.card{fill:#fff;stroke:#cbd6e2;stroke-width:2}.device{fill:#f9fbfd;stroke:#9fb2c5;stroke-width:2}.title{font:700 30px 'Segoe UI',Arial,sans-serif;fill:#142b45}.subtitle{font:16px 'Segoe UI',Arial,sans-serif;fill:#586e83}.head{font:700 19px 'Segoe UI',Arial,sans-serif;fill:#18344e}.label{font:15px 'Segoe UI',Arial,sans-serif;fill:#30485e}.small{font:13px 'Segoe UI',Arial,sans-serif;fill:#52677c}.pin{font:700 13px 'Segoe UI',Arial,sans-serif;fill:#18344e}.wire{fill:none;stroke:#2878b8;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}.power{fill:none;stroke:#d8781e;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}.ground{fill:none;stroke:#596b7d;stroke-width:3;stroke-dasharray:8 7;stroke-linecap:round;stroke-linejoin:round}.signal{fill:none;stroke:#17856f;stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round}.echo{fill:none;stroke:#7b55ad;stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round}.arrow{fill:#2878b8}.pwrarrow{fill:#d8781e}.sigarrow{fill:#17856f}.echofill{fill:#7b55ad}.badge{fill:#e8f2fb;stroke:#bbd3e6}.warn{fill:#fff5e7;stroke:#ecc68c;stroke-width:1.5}
+    </style>
+    <marker id="arrBlue" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" class="arrow"/></marker>
+    <marker id="arrPower" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" class="pwrarrow"/></marker>
+    <marker id="arrSig" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" class="sigarrow"/></marker>
+    <marker id="arrEcho" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" class="echofill"/></marker>
+  </defs>
+  <rect width="1500" height="980" class="bg"/>
+  <text x="54" y="58" class="title">ESP32-C6 Robot · Hardware Wiring Overview</text>
+  <text x="56" y="87" class="subtitle">Signal pins follow the current firmware configuration. Confirm board labels and motor-driver module revision before wiring.</text>
+
+  <!-- power cards -->
+  <rect x="55" y="125" width="295" height="168" rx="18" class="card"/>
+  <text x="78" y="160" class="head">Battery pack</text>
+  <text x="78" y="190" class="label">Observed during trials:</text>
+  <text x="78" y="216" class="label">about 12.3–12.5 V</text>
+  <text x="78" y="250" class="small">Verify chemistry, cell count and polarity.</text>
+
+  <rect x="420" y="125" width="295" height="168" rx="18" class="card"/>
+  <text x="444" y="160" class="head">Buck converter</text>
+  <text x="444" y="190" class="label">Battery voltage → regulated</text>
+  <text x="444" y="214" class="label">board-compatible input</text>
+  <text x="444" y="250" class="small">Set and measure output before connecting.</text>
+
+  <rect x="80" y="405" width="335" height="230" rx="20" class="device"/>
+  <text x="110" y="446" class="head">L298N dual motor driver</text>
+  <text x="110" y="480" class="label">Left motor · Motor A</text>
+  <text x="110" y="505" class="pin">IN1 GPIO 2 · IN2 GPIO 3</text>
+  <text x="110" y="530" class="pin">ENA PWM GPIO 6</text>
+  <line x1="110" y1="550" x2="385" y2="550" stroke="#dce4ec" stroke-width="2"/>
+  <text x="110" y="579" class="label">Right motor · Motor B</text>
+  <text x="110" y="604" class="pin">IN3 GPIO 4 · IN4 GPIO 5 · ENB GPIO 7</text>
+
+  <rect x="80" y="690" width="335" height="118" rx="18" class="device"/>
+  <text x="108" y="728" class="head">Two DC gear motors</text>
+  <text x="108" y="758" class="label">Connect to L298N OUT1/OUT2</text>
+  <text x="108" y="783" class="label">and OUT3/OUT4 respectively.</text>
+
+  <!-- core -->
+  <rect x="545" y="380" width="390" height="300" rx="24" fill="#eaf3fb" stroke="#6c9bbd" stroke-width="3"/>
+  <text x="585" y="426" class="head" style="font-size:24px">ESP32-C6 development board</text>
+  <text x="585" y="466" class="label">Motor PWM / direction · GPIO 2–7</text>
+  <text x="585" y="502" class="label">Encoders · GPIO 18 / 19</text>
+  <text x="585" y="538" class="label">MPU6050 I²C · SDA 21 / SCL 22</text>
+  <text x="585" y="574" class="label">HC-SR04 · TRIG 14 / ECHO 20</text>
+  <text x="585" y="610" class="label">Onboard RGB status LED · GPIO 8</text>
+  <rect x="583" y="631" width="312" height="28" rx="9" class="badge"/>
+  <text x="598" y="651" class="small">Shared ground with driver and sensors</text>
+
+  <!-- peripherals -->
+  <rect x="1080" y="125" width="350" height="160" rx="18" class="device"/>
+  <text x="1110" y="163" class="head">MPU6050 IMU</text>
+  <text x="1110" y="194" class="label">3.3 V · GND · SDA GPIO 21</text>
+  <text x="1110" y="221" class="label">SCL GPIO 22 · I²C address 0x68</text>
+  <text x="1110" y="256" class="small">Gyro + accelerometer; no magnetometer.</text>
+
+  <rect x="1080" y="345" width="350" height="144" rx="18" class="device"/>
+  <text x="1110" y="383" class="head">Left / right wheel encoders</text>
+  <text x="1110" y="417" class="label">LM393 digital outputs → GPIO 18 / 19</text>
+  <text x="1110" y="452" class="small">Encoder boards powered per module rating.</text>
+
+  <rect x="1080" y="550" width="350" height="180" rx="18" class="device"/>
+  <text x="1110" y="588" class="head">HC-SR04 ultrasonic</text>
+  <text x="1110" y="618" class="label">VCC 5 V · GND · TRIG GPIO 14</text>
+  <text x="1110" y="646" class="label">ECHO 5 V → resistor divider → GPIO 20</text>
+  <text x="1110" y="682" class="small">Forward near-obstacle stop threshold: ≤ 5 cm</text>
+
+  <!-- power wiring -->
+  <path d="M350 210H390V345H230V405" class="power" marker-end="url(#arrPower)"/>
+  <text x="105" y="350" class="small">Battery → motor supply</text>
+  <path d="M350 245H420" class="power" marker-end="url(#arrPower)"/>
+  <path d="M568 293V340H740V380" class="power" marker-end="url(#arrPower)"/>
+  <text x="594" y="330" class="small">regulated supply to board input</text>
+  <path d="M350 272H380V835H1000V790H1240V730" class="ground"/>
+  <path d="M247 635V835M740 680V835M1250 285V835M1250 489V835" class="ground"/>
+  <text x="675" y="865" class="small">Common GND reference (dashed)</text>
+
+  <!-- motor signals and outputs -->
+  <path d="M545 470H500V520H415" class="wire" marker-end="url(#arrBlue)"/>
+  <text x="430" y="490" class="small">GPIO direction + PWM</text>
+  <path d="M247 635V690" class="power" marker-end="url(#arrPower)"/>
+  <text x="260" y="672" class="small">OUT1–4</text>
+
+  <!-- I2C and encoder signals -->
+  <path d="M935 456H1005V230H1080" class="signal" marker-end="url(#arrSig)"/>
+  <text x="958" y="215" class="small">SDA 21 / SCL 22</text>
+  <path d="M935 510H1015V417H1080" class="signal" marker-end="url(#arrSig)"/>
+  <text x="949" y="402" class="small">Pulse inputs 18 / 19</text>
+
+  <!-- ultrasonic trigger and divided echo -->
+  <path d="M935 575H1025V610H1080" class="signal" marker-end="url(#arrSig)"/>
+  <text x="963" y="596" class="small">TRIG 14</text>
+  <path d="M1080 665H1040V760H1000V640H935" class="echo" marker-end="url(#arrEcho)"/>
+  <text x="951" y="748" class="small">ECHO divided → GPIO 20</text>
+
+  <!-- divider detail card -->
+  <rect x="480" y="710" width="470" height="158" rx="18" class="warn"/>
+  <text x="505" y="744" class="head">HC-SR04 ECHO voltage divider</text>
+  <text x="505" y="793" class="small">ECHO 5 V</text>
+  <path d="M565 788H610M676 788H712M712 788H817" stroke="#7b55ad" stroke-width="3" fill="none"/>
+  <path d="M610 788l8-8 8 16 8-16 8 16 8-16 8 16 8-8" stroke="#7b55ad" stroke-width="3" fill="none"/>
+  <text x="620" y="768" class="small">R1 · 1 kΩ</text>
+  <circle cx="712" cy="788" r="5" fill="#7b55ad"/>
+  <text x="824" y="793" class="small">GPIO 20 · ≈3.3 V</text>
+  <path d="M712 793V808M712 844V850" stroke="#7b55ad" stroke-width="3" fill="none"/>
+  <path d="M712 808l-8 6 16 6-16 6 16 6-8 6" stroke="#7b55ad" stroke-width="3" fill="none"/>
+  <text x="737" y="833" class="small">R2 · 2 kΩ</text>
+  <path d="M698 850H726M702 856H722M707 862H717" stroke="#596b7d" stroke-width="2.5" fill="none"/>
+
+  <rect x="1030" y="790" width="410" height="92" rx="16" class="card"/>
+  <text x="1055" y="824" class="head">Power safety</text>
+  <text x="1055" y="853" class="small">Never apply 5 V Echo or battery voltage to an ESP32 GPIO.</text>
+
+  <text x="56" y="940" class="small">Diagram reflects the current source configuration. Check exact board pin labels, regulator jumpers, and power ratings before connection.</text>
+</svg>

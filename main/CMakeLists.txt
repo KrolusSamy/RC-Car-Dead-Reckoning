@@ -1,0 +1,30 @@
+idf_component_register(
+    SRCS 
+        "main.c"
+        "../components/app/src/APP_Orchestrator_Prog.c"
+        "../components/middleware/basic-software/hal/src/HAL_LED_Prog.c"
+        "../components/middleware/basic-software/services/src/SRV_WIFI_Prog.c"
+        "../components/middleware/basic-software/services/src/SRV_UDP_Prog.c"
+        "../components/middleware/basic-software/services/src/SRV_OTA_Prog.c"
+        "../components/middleware/basic-software/hal/src/HAL_ENCODER_Prog.c"
+        "../components/middleware/basic-software/hal/src/HAL_MOTOR_Prog.c"
+        "../components/middleware/basic-software/hal/src/HAL_ULTRASONIC_Prog.c"
+        "../components/middleware/basic-software/hal/src/MPU6050_Prog.c"
+        "../components/middleware/basic-software/services/src/SRV_POSE_Prog.c"
+
+    INCLUDE_DIRS 
+        "."
+        "../components/app/include"
+        "../components/middleware/basic-software/services/include"
+        "../components/middleware/basic-software/hal/Include"
+        "../components/middleware/basic-software/mcal/include"
+        "../components/middleware/common"
+    REQUIRES 
+        "esp_wifi" 
+        "nvs_flash" 
+        "led_strip"
+        "esp_http_client"
+        "app_update"
+        "esp_timer"
+        "driver"
+)

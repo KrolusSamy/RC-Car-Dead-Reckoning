@@ -1,0 +1,7 @@
+#ifndef HAL_ULTRASONIC_CFG_H
+#define HAL_ULTRASONIC_CFG_H
+
+#define ULTRASONIC_TRIG_PIN    14
+#define ULTRASONIC_ECHO_PIN    20
+
+#endif
